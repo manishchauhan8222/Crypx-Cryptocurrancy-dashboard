@@ -1,0 +1,336 @@
+:root {
+  --amount-color: (#fcdf03);
+  --static-bg-color: rgb(43, 43, 43);
+  --static-bg-low-color: rgb(255, 32, 32);
+  --bg-light: #f0ebeb;
+  --bg-dark: #0b0c0d;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.container-fluid {
+  padding: 0;
+}
+.main-container {
+  padding-top: 3rem;
+  z-index: 999;
+}
+.form-select {
+  width: fit-content;
+}
+.navbar-brand {
+  color: white;
+  color: #b6b641 !important;
+}
+.row {
+  display: flex;
+  justify-content: center;
+}
+.offcanvas-card {
+  width: 80% !important;
+  margin: 16px auto !important;
+}
+/* coin-page */
+.card-text {
+  color: var(--amount-color);
+}
+
+/* coin stats */
+.card {
+  width: 11rem;
+  background-color: rgb(43, 43, 43);
+  border: 1px solid rgba(250, 250, 250, 0.125);
+}
+
+h1 {
+  font-weight: 700;
+}
+.card-title {
+  font-weight: 700;
+}
+.fw-bold {
+  color: rgb(252, 223, 3);
+}
+
+.low {
+  color: rgb(255, 32, 32);
+}
+.current-price {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+}
+.current-price-amount {
+  text-align: center;
+  font-size: 3rem;
+  color: rgb(252, 223, 3);
+  font-weight: 700;
+}
+.cardSection {
+  padding-top: 4rem;
+}
+
+/* Coin select and chart type */
+.header-search {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-select {
+  width: fit-content;
+  background-color: rgb(43, 43, 43);
+  border: 1px solid rgba(250, 250, 250, 0.125);
+  color: white;
+}
+
+.navbar-brand {
+  font-family: NHaasGroteskDSPro-65Md;
+  color: white;
+}
+
+/* HomePage nav */
+.ex {
+  border-radius: 10px;
+  background: #d2b100;
+  color: black;
+}
+.navigation {
+  width: 100%;
+}
+.nav-content {
+  width: 100%;
+  box-shadow: 0px 5px 4px rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 1000;
+  background: #151928 !important;
+  top: 0;
+}
+
+.navbar-brand {
+  color: #d2b100;
+}
+
+/* hamburger */
+.line {
+  border-bottom: 1px solid white;
+  width: 1.3rem;
+}
+.hamburger-menu {
+  display: grid;
+  cursor: pointer;
+  display: none;
+  margin: 10px auto;
+}
+#offcanvasRight {
+  width: 100%;
+  display: none;
+}
+.offcanvas-button {
+  width: 37%;
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.login {
+  background: rgb(24, 26, 32);
+  color: white;
+}
+.register {
+  background-color: #fcd535;
+  color: black;
+}
+.offcanvas-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px auto;
+  width: 100%;
+}
+.offcanvas-header .btn-close {
+  position: relative;
+  left: 92%;
+}
+
+.offcanvas {
+  background-color: #1e2026;
+}
+
+.offcanvas-item img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.offcanvas-text {
+  color: #ffffffe0;
+}
+.offcanvas-item {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+}
+.offcanvas-item {
+  width: 90%;
+  margin: auto;
+}
+.offcanvas-items {
+  margin-top: 33px;
+}
+
+/* chart */
+.charts {
+  margin-top: 43px;
+}
+.charts-bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+  gap: 20px;
+}
+.charts-bottom-chart {
+  width: 50%;
+}
+#apexchartsid0uomnc {
+  text-align: center;
+}
+
+.card {
+  width: 11rem;
+  width: fit-content;
+}
+.btn-time {
+  border: 1px solid rgba(250, 250, 250, 0.125);
+  width: 3rem;
+  background: transparent;
+  border-radius: 6px;
+}
+.toolbar {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 3px;
+  padding-left: 10px;
+}
+.offcanvas-header .btn-close {
+  position: relative;
+  left: 92%;
+}
+.apexcharts-toolbar {
+  max-width: fit-content !important;
+  gap: 10px;
+  margin-right: 50px;
+}
+
+/* hover */
+
+.btn-time:hover {
+  border: 1px solid #fcd535;
+}
+
+@media screen and (max-width: 1000px) {
+  .nav-content {
+    padding: 1rem 4rem;
+    width: 100%;
+    padding: 1rem 1rem;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .charts-bottom {
+    display: grid;
+  }
+  .charts-bottom-chart {
+    width: 100%;
+  }
+  .row {
+    display: none;
+  }
+  .hamburger-menu {
+    display: grid;
+    gap: 6px;
+  }
+  #offcanvasRight {
+    display: block;
+  }
+
+  .line {
+    font-weight: 600;
+  }
+  select.form-select {
+    width: fit-content;
+  }
+
+  .form-select {
+    width: 40% !important;
+    font-size: 1rem;
+  }
+  .nav-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-content {
+    top: 0;
+  }
+
+  .header-search {
+    justify-content: center;
+  }
+  .current-price {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 25px;
+  }
+  .current-price-amount {
+    font-size: 25px;
+  }
+  .cardSection {
+    text-align: center;
+  }
+  .fs-1 {
+    margin: 0px auto !important;
+    font-size: 2.5rem !important;
+  }
+  .coin-price-container {
+    display: flex;
+    justify-content: center;
+    gap: 68px;
+  }
+  .header-search {
+    height: fit-content;
+  }
+}
+@media screen and (max-width: 650px) {
+  .container {
+    text-align: center;
+    padding-top: 3rem;
+    z-index: 999;
+  }
+  .apexcharts-toolbar {
+    gap: 4px;
+    margin-right: 16px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .apexcharts-toolbar {
+    gap: 1px;
+    margin-right: 5px;
+  }
+}
