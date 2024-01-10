@@ -5,6 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 export class Header extends Component {
+  handleChartTypeChange = (event) => {
+    this.props.handleChartTypeChange(event);
+  };
+
   render() {
     return (
       <div>
@@ -46,10 +50,10 @@ export class Header extends Component {
                     aria-label=".form-select-lg example"
                     name="selectCoin"
                     style={{ width: "fit-content" }}
-                    onChange={this.props.handle_Submit}
+                    onChange={this.props.handleChartTypeChange}
                   >
                     <option value="area">Chart Type</option>
-                    <option value="column">Column</option>
+
                     <option value="area">Area</option>
                     <option value="bar">Bar</option>
                   </select>

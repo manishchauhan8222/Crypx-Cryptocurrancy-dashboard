@@ -12,16 +12,20 @@ import desktopImage from "../Images/desktop.png";
 import mobileImage from "../Images/mobile.svg";
 import proImage from "../Images/pro.svg";
 import CodeImage from "../Images/frame.png";
+import userImage from "../Images/user.png";
 
 // PAGES
 import Coin from "./Coin";
 import faqData from "./FAQ";
+import Register from "../Login&Register/Register";
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeIndex: null,
+
+      selectedImage: mobileImage,
     };
   }
 
@@ -31,7 +35,37 @@ export default class HomePage extends Component {
     }));
   };
 
+  toggleimage = (e) => {
+    const targetClass = e.target.classList; // Get the classes of the clicked element
+    let selectedImage = null;
+
+    // Check the classes of the clicked element
+    if (targetClass.contains("desktop")) {
+      selectedImage = desktopImage;
+    } else if (targetClass.contains("pro")) {
+      selectedImage = proImage;
+    } else {
+      selectedImage = mobileImage;
+    }
+
+    // Update the selectedImage state
+    this.setState({ selectedImage });
+  };
+  toggleOffCanvas = () => {
+    const offcanvas = document.getElementById("offcanvasRight");
+    const body = document.body;
+
+    if (offcanvas.classList.contains("show")) {
+      offcanvas.classList.remove("show");
+      body.classList.remove("offcanvas-open");
+    } else {
+      offcanvas.classList.add("show");
+      body.classList.add("offcanvas-open");
+    }
+  };
+
   render() {
+    const { selectedImage } = this.state;
     return (
       <div className="main-container">
         <nav className="navbar navbar-expand-lg">
@@ -47,18 +81,10 @@ export default class HomePage extends Component {
                   </Link>
                 </div>
                 <div className="nav-left-b homepage-nav-left-b">
-                  <button
-                    type="button"
-                    class="btn btn-success btn-email btn-login"
-                  >
-                    Log In
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-success btn-email btn-register"
-                  >
-                    Register
-                  </button>
+                  <div className="hiuser-nav">
+                    Hi User
+                    <img src={userImage}></img>{" "}
+                  </div>
 
                   <div
                     class=" hamburger-menu"
@@ -87,8 +113,7 @@ export default class HomePage extends Component {
                       ></button>
                     </div>
                     <div className="offcanvas-buttons">
-                      <div className="offcanvas-button login">Log In</div>
-                      <div className="offcanvas-button register">Register</div>
+                      <div className="hiuser">Hi User</div>
                     </div>
                     {this.props.HomePageSideBarMenu.map((item, index) => (
                       <div className="offcanvas-items">
@@ -118,12 +143,33 @@ export default class HomePage extends Component {
               </p>
               <div className="home-container-1-left-email">
                 <input type="text" placeholder="Email/Phone number"></input>
+
                 <button
+                  class="btn  btn-email btn-email-input"
                   type="button"
-                  class="btn btn-success btn-email btn-email-input"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasTop"
+                  aria-controls="offcanvasTop"
                 >
                   Register
                 </button>
+
+                <div
+                  className="offcanvas offcanvas-top"
+                  tabindex="-1"
+                  id="offcanvasTop"
+                  aria-labelledby="offcanvasTopLabel"
+                >
+                  <div class="offcanvas-header">
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <Register></Register>
+                </div>
               </div>
               <div className="home-container-1-left-refer">
                 <div className="home-container-1-left-refer-content">
@@ -165,16 +211,70 @@ export default class HomePage extends Component {
           </div>
           <div className="home-container-2">
             <div className=" home-container-2-left">
-              <img
-                src={mobileImage}
-                alt="mobile image"
-                className="home-container-2-left-mobile-image"
-              ></img>
-              <img
-                src={desktopImage}
-                alt="desktop image"
-                className="home-container-2-left-desktop-image"
-              ></img>
+              <div className="home-container-2-left-image">
+                {(selectedImage === desktopImage && (
+                  <img
+                    src={selectedImage}
+                    alt="selected image"
+                    className={`selected-image ${
+                      selectedImage === desktopImage ? "" : "hide-on-small"
+                    }`}
+                    style={{
+                      width: selectedImage === desktopImage ? "100%" : "50%",
+                    }}
+                  />
+                )) || (
+                  <img
+                    src={selectedImage}
+                    alt="selected image"
+                    className="selected-image"
+                    style={{
+                      width: selectedImage === desktopImage ? "100%" : "50%",
+                    }}
+                  />
+                )}
+              </div>
+              <div className="imagetoggle">
+                <p
+                  className={`imagetoggle-text desktop ${
+                    selectedImage === desktopImage ? "" : "hide-on-small"
+                  }`}
+                  onClick={(e) => this.toggleimage(e)}
+                  style={{
+                    borderBottom:
+                      selectedImage === desktopImage
+                        ? "1px solid #fcd535"
+                        : "none",
+                    color: selectedImage === desktopImage ? "white" : "inherit",
+                  }}
+                >
+                  Desktop
+                </p>
+                <p
+                  className="imagetoggle-text lite"
+                  onClick={(e) => this.toggleimage(e)}
+                  style={{
+                    borderBottom:
+                      selectedImage === mobileImage
+                        ? "1px solid #fcd535"
+                        : "none",
+                    color: selectedImage === mobileImage ? "white" : "inherit",
+                  }}
+                >
+                  Lite
+                </p>
+                <p
+                  className="imagetoggle-text pro"
+                  onClick={(e) => this.toggleimage(e)}
+                  style={{
+                    borderBottom:
+                      selectedImage === proImage ? "1px solid #fcd535" : "none",
+                    color: selectedImage === proImage ? "white" : "inherit",
+                  }}
+                >
+                  Pro
+                </p>
+              </div>
             </div>
             <div className=" home-container-2-right">
               <div className=" home-container-2-right-heading">
@@ -253,12 +353,33 @@ export default class HomePage extends Component {
               </span>
               &nbsp; in rewards
             </p>
+
             <button
+              class="btn  btn-email home-footer-container-1-btn"
               type="button"
-              class="btn btn-success btn-email home-footer-container-1-btn"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasTop"
+              aria-controls="offcanvasTop"
             >
-              Register Now
+              Register
             </button>
+
+            <div
+              className="offcanvas offcanvas-top"
+              tabindex="-1"
+              id="offcanvasTop"
+              aria-labelledby="offcanvasTopLabel"
+            >
+              <div class="offcanvas-header">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <Register></Register>
+            </div>
           </div>
           <div className="home-footer-container-2">
             <div className="home-footer-container-2-content">

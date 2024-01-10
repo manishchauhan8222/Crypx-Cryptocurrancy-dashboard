@@ -1,0 +1,91 @@
+.loginpage-box {
+  margin: 6rem auto;
+  text-align: center;
+  background: white;
+  padding: 10px 66px;
+  border-radius: 5px;
+}
+
+.login-heading {
+  font-size: 25px;
+  font-weight: 600;
+  padding: 20px;
+}
+
+.user {
+  width: 26%;
+  background: #f5bbbb;
+  margin: auto;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+.user img {
+  width: 100%;
+}
+.login-name {
+  width: 100%;
+  display: flex;
+  gap: 17px;
+  margin: 24px auto;
+}
+
+.firstNameInput,
+.lastNameInput {
+  width: 50% !important;
+  padding: 7px !important;
+  background: transparent !important;
+  border: 1px solid #00000063 !important;
+  color: black !important;
+  border-radius: 6px !important;
+  display: block !important;
+}
+
+.emailInput,
+.passwordInput {
+  width: 100% !important;
+  padding: 7px !important;
+  background: transparent !important;
+  border: 1px solid #00000063 !important;
+  color: black !important;
+  border-radius: 6px !important;
+  display: block !important;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 9px;
+  border-radius: 7px;
+  cursor: pointer;
+  background: #757515;
+  margin-top: 3rem;
+  border: none;
+  outline: none;
+}
+
+.submit-btn {
+  margin-bottom: 0px;
+  color: white;
+}
+
+.emailInput,
+.passwordInput {
+  margin-bottom: 14px;
+}
+.loginpage-box {
+  padding: 42px 66px;
+  width: 500px;
+}
+
+@media screen and (max-width: 650px) {
+  .loginpage-box {
+    margin: 4rem auto;
+  }
+  .loginpage-box {
+    padding: 42px 14px;
+    width: 92vw;
+  }
+  .user {
+    width: 100px;
+  }
+}

@@ -178,14 +178,20 @@ export class ChartSection extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     if (this.prevId !== this.props.Id) {
       this.prevId = this.props.Id;
       this.fetchData();
-    }
-    if (this.prevSelection !== this.state.Price.options.selection) {
+    } else if (this.prevSelection !== this.state.Price.options.selection) {
       this.prevSelection = this.state.Price.options.selection;
       this.fetchData();
+    }
+    if (prevProps.chartType !== this.props.chartType) {
+      // Check if the chartType prop has changed
+      // Set the state with the updated chartType value
+      this.setState({
+        chartType: this.props.chartType,
+      });
     }
   }
 
@@ -273,7 +279,7 @@ export class ChartSection extends Component {
             <Chart
               options={this.state.Price.options}
               series={this.state.Price.series}
-              type="area"
+              type={this.props.chartType}
               height="400"
               width="100%"
             />
@@ -285,7 +291,7 @@ export class ChartSection extends Component {
             <Chart
               options={this.state.Market_Cap.options}
               series={this.state.Market_Cap.series}
-              type="line"
+              type={this.props.chartType}
               height="300"
               width="100%"
             />
@@ -294,7 +300,7 @@ export class ChartSection extends Component {
             <Chart
               options={this.state.Tot_Vol.options}
               series={this.state.Tot_Vol.series}
-              type="line"
+              type={this.props.chartType}
               height="300"
               width="100%"
             />

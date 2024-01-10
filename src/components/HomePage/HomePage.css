@@ -64,6 +64,11 @@
   width: 100%;
   display: none;
 }
+#offcanvasTop {
+  height: 100vh;
+  background: #151928 !important;
+}
+
 .offcanvas-button {
   width: 37%;
   border-radius: 10px;
@@ -273,19 +278,21 @@ li.list-group-item {
   width: 60%;
   text-align: center;
   color: white;
+  margin-top: 4rem;
 }
 .home-container-2 {
   display: flex;
   margin: 7rem auto;
   justify-content: center;
-  align-items: center;
 }
-.home-container-2-left img {
+.lite,
+.pro {
   width: 70%;
 }
-.home-container-2-left-desktop-image {
-  display: none;
+.desktop {
+  width: 95%;
 }
+
 .home-container-2-right-heading {
   font-weight: 600;
   font-size: 2.5rem;
@@ -306,9 +313,12 @@ p.home-container-2-right-heading-text {
   border-radius: 20px;
 }
 .home-container-2 {
-  width: 60%;
+  width: 90%;
+  text-align: center;
 }
-
+.home-container-2-left-image {
+  height: 80%;
+}
 /* .home-container-3 */
 
 .home-container-3-content-heading-text {
@@ -422,7 +432,7 @@ p.home-container-2-right-heading-text {
 }
 
 .home-container-3-content-questions:hover {
-  background-color: #1e2026;
+  background-color: #1e2026 !important;
 }
 
 /* media-query */
@@ -444,7 +454,6 @@ p.home-container-2-right-heading-text {
   }
   .btn-email-input {
     padding: 12px 10px;
-    width: 30%;
   }
   .home-footer-container-1-btn {
     width: 21%;
@@ -500,6 +509,9 @@ p.home-container-2-right-heading-text {
   }
   #offcanvasRight {
     display: block;
+  }
+  .hiuser-nav {
+    display: none;
   }
 
   .line {
@@ -560,12 +572,7 @@ p.home-container-2-right-heading-text {
   .home-container-2-left img {
     width: 100%;
   }
-  .home-container-2-left-mobile-image {
-    display: none;
-  }
-  .home-container-2-left-desktop-image {
-    display: block;
-  }
+
   .home-container-3-content-heading-text {
     font-size: 2rem;
   }
@@ -574,6 +581,16 @@ p.home-container-2-right-heading-text {
   }
   .homepage-nav-left-b {
     width: fit-content !important;
+  }
+  .hide-on-small {
+    display: none;
+  }
+  .selected-image {
+    width: 100% !important;
+    margin-top: 1rem !important;
+  }
+  .home-container-1-left-email {
+    justify-content: center;
   }
 }
 
@@ -672,4 +689,35 @@ p.home-container-2-right-heading-text {
   .home-container-1-left-heading {
     font-size: 1.6rem;
   }
+}
+
+/* changing the button style coming from bootstarp */
+.btn:active,
+.btn:focus {
+  background-color: #fcd535;
+}
+.hiuser,
+.hiuser-nav {
+  color: white;
+  font-style: italic;
+  font-size: 23px;
+  font-weight: 500;
+}
+.hiuser-nav img {
+  width: 1.5rem;
+  margin-left: 10px;
+}
+.imagetoggle {
+  display: flex;
+  color: #fefefe8e;
+  width: 44%;
+  justify-content: center;
+  gap: 1rem;
+  margin: 52px auto;
+  border-bottom: 1px solid white;
+  cursor: pointer;
+  padding-bottom: 15px;
+}
+.imagetoggle-text {
+  margin-bottom: 0px;
 }

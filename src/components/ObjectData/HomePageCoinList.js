@@ -1,11 +1,5 @@
 const HomePageCoinList = [
   {
-    symbol: `AVAX`,
-    id: `Avalanche`,
-    price: 27273,
-    path: `/singleCoin`,
-  },
-  {
     symbol: `ETH`,
     id: `Ethereum`,
     price: 27273,

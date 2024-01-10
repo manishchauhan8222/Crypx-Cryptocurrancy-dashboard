@@ -9,10 +9,8 @@ export default class ComponentCoinListPage extends Component {
     super(props);
     this.state = {
       searchItems: "",
-      filteredCoins: [],
       currentPage: 1,
       coinsPerPage: 10,
-      totalCoins: 5000,
     };
   }
 
@@ -27,26 +25,61 @@ export default class ComponentCoinListPage extends Component {
   handlePageChange = (pageNumber) => {
     this.setState({ currentPage: pageNumber });
   };
-  render() {
-    const { currentPage, coinsPerPage, searchItems, totalCoins } = this.state;
-    const { ComponentCoinList } = this.props;
 
-    // Filter the list based on search input
-    const filteredCoins = ComponentCoinList.filter(
+  render() {
+    const { currentPage, coinsPerPage, searchItems } = this.state;
+    const { ComponentCoinList, NewstaticComponentList } = this.props;
+
+    const combinedList = [...ComponentCoinList, ...NewstaticComponentList];
+
+    // Filter ComponentCoinList based on search input
+    let displayCoins = combinedList.filter(
       (item) =>
         item.symbol.toLowerCase().includes(searchItems) ||
         item.id.toLowerCase().includes(searchItems)
     );
 
+    // If there are search results, use them; otherwise, use NewstaticComponentList
+    let currentCoins;
+    if (displayCoins.length > 0) {
+      currentCoins = displayCoins;
+    } else {
+      currentCoins = NewstaticComponentList;
+    }
+
     // Implement pagination
     const indexOfLastCoin = currentPage * coinsPerPage;
     const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
 
-    // Ensure that indexOfLastCoin doesn't exceed totalCoins
-    const currentCoins = filteredCoins.slice(
-      indexOfFirstCoin,
-      Math.min(indexOfLastCoin, totalCoins)
-    );
+    const totalDisplayCoins = currentCoins.length;
+
+    const renderCoins = currentCoins
+      .slice(indexOfFirstCoin, indexOfLastCoin)
+      .map((item, index) => (
+        <li className="list-group-item coin-data-container" key={index}>
+          <Link to="/singleCoin">
+            <div className="list-group-item-container data-container">
+              <div className="symbol-name-marketValue">
+                <p className="coin-headings">
+                  {item.symbol.toUpperCase()}&nbsp;
+                  <span className="light">/{item.id}</span>
+                </p>
+                <p className="market-value light">
+                  VOL.{item.marketVolume || "Load.."}
+                </p>
+              </div>
+              <div className="price-high-container">
+                <div className="price">
+                  <p className="coin-headings">{item.price || "API Load.."}</p>
+                </div>
+                <div className="last-day-change green-box">
+                  <p className="coin-headings">{item.high || "API Load.."}</p>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </li>
+      ));
 
     return (
       <div className="coinList-container">
@@ -91,44 +124,18 @@ export default class ComponentCoinListPage extends Component {
                 </div>
                 <div className="price-high-container">
                   <div className="price">
-                    <p className="coin-headings">Price</p>
+                    <p className="coin-headings">Price $</p>
                   </div>
                   <div className="last-day-change">
-                    <p className="coin-headings">24h High</p>
+                    <p className="coin-headings">24h High %</p>
                   </div>
                 </div>
               </div>
             </li>
           </ul>
-          <ul className="list-group coin-data-main-container">
-            {currentCoins.map((item, index) => (
-              <li className="list-group-item coin-data-container" key={index}>
-                <Link to="/singleCoin">
-                  <div className="list-group-item-container data-container">
-                    <div className="symbol-name-marketValue">
-                      <p className="coin-headings">
-                        {item.symbol}&nbsp;
-                        <span className="light">/{item.id}</span>
-                      </p>
-                      <p className="market-value light">
-                        VOL.{item.marketValue || "N/A"}
-                      </p>
-                    </div>
-                    <div className="price-high-container">
-                      <div className="price">
-                        <p className="coin-headings">{item.price || "N/A"}</p>
-                      </div>
-                      <div className="last-day-change green-box">
-                        <p className="coin-headings">{item.high || "N/A"}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <ul className="list-group coin-data-main-container">{renderCoins}</ul>
           <Pagination
-            totalCoins={filteredCoins.length}
+            totalCoins={totalDisplayCoins}
             coinsPerPage={coinsPerPage}
             currentPage={currentPage}
             onChangePage={this.handlePageChange}

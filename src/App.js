@@ -6,21 +6,28 @@ import "./App.css";
 
 // OBJECT DATA
 import HomePageCoinList from "./components/ObjectData/HomePageCoinList";
-// import ComponentCoinList from "./components/ObjectData/ComponentCoinList";
+import StaticComponentCoinList from "./components/ObjectData/StaticComponentCoinList";
 import HomePageSideBarMenu from "./components/ObjectData/HomePageSideBarMenu";
 
 //PAGES
 import HomePage from "./components/HomePage/HomePage";
 import ComponentCoinListPage from "./components/ComponentCoinListPage/ComponentCoinListPage";
 import MainSingleCoinPage from "./components/SingleCoinPage/MainSingleCoinPage";
+import Register from "./components/Login&Register/Register";
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
+      // Data for home page
       HomePageCoinList: HomePageCoinList,
-      componentCoinList: [],
-      HomePageSideBarMenu: HomePageSideBarMenu,
       coins: [],
+      //  data for componentpage
+
+      NewstaticComponentList: [],
+      componentCoinList: [],
+
+      //data for side menu bar
+      HomePageSideBarMenu: HomePageSideBarMenu,
     };
   }
   // fetching data for homepage coinlist
@@ -30,6 +37,7 @@ export default class App extends Component {
         `https://api.coingecko.com/api/v3/coins/${id.toLowerCase()}`
       );
       let jsonData = await data.json();
+
       return jsonData.market_data?.current_price?.usd || "API Loading..";
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -59,6 +67,64 @@ export default class App extends Component {
     this.setState({ coins: updatedCoins });
   };
 
+  //fetching data for static componentcoinlist default
+
+  fetchDataForComponent = async (id) => {
+    try {
+      let data = await fetch(
+        `https://api.coingecko.com/api/v3/coins/${id.toLowerCase()}`
+      );
+      let jsonData = await data.json();
+      const price = jsonData.market_data?.current_price?.usd || "API Loading..";
+      const marketVolume =
+        jsonData.market_data?.total_volume?.usd || "API Loading..";
+      const high =
+        jsonData.market_data?.price_change_percentage_24h || "API Loading..";
+      return {
+        price,
+        marketVolume,
+        high,
+      };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return {
+        price: "API Loading..",
+        marketVolume: "API Loading..",
+        high: "API Loading..",
+      };
+    }
+  };
+
+  updateCoinPriceForComponent = async () => {
+    try {
+      const updateCoinPrice = await Promise.all(
+        StaticComponentCoinList.map(async (coin) => {
+          try {
+            const { price, marketVolume, high } =
+              await this.fetchDataForComponent(coin.id);
+            return {
+              ...coin,
+              price,
+              marketVolume,
+              high,
+            };
+          } catch (error) {
+            console.error(`Error fetching data for ${coin.id}:`, error);
+            return {
+              ...coin,
+              price: "API Load..",
+              marketVolume: "API Load..",
+              high: "..",
+            };
+          }
+        })
+      );
+      this.setState({ NewstaticComponentList: updateCoinPrice });
+      console.log(this.state.NewstaticComponentList);
+    } catch (error) {
+      console.error("Error updating component prices:", error);
+    }
+  };
   // fetching data for componentcoinlist
   fetchComponentCoinList = async () => {
     try {
@@ -73,9 +139,41 @@ export default class App extends Component {
     }
   };
 
+  updateCoinPriceForComponentAPI = async () => {
+    try {
+      const updateCoinPrice = await Promise.all(
+        this.state.componentCoinList.map(async (coin) => {
+          try {
+            const { price, marketVolume, high } =
+              await this.fetchDataForComponent(coin.id);
+            return {
+              ...coin,
+              price,
+              marketVolume,
+              high,
+            };
+          } catch (error) {
+            console.error(`Error fetching data for ${coin.id}:`, error);
+            return {
+              ...coin,
+              price: "API Load..",
+              marketVolume: "API Load..",
+              high: "..",
+            };
+          }
+        })
+      );
+      this.setState({ componentCoinList: updateCoinPrice });
+    } catch (error) {
+      console.error("Error updating component prices:", error);
+    }
+  };
+
   componentDidMount() {
     this.updateCoinPrice();
+    this.updateCoinPriceForComponent();
     this.fetchComponentCoinList();
+    this.updateCoinPriceForComponentAPI();
   }
 
   render() {
@@ -94,11 +192,13 @@ export default class App extends Component {
           path="/CoinList"
           element={
             <ComponentCoinListPage
+              NewstaticComponentList={this.state.NewstaticComponentList}
               ComponentCoinList={this.state.componentCoinList}
             />
           }
         />
         <Route path="/singleCoin" element={<MainSingleCoinPage />} />
+        <Route path="/register" element={<Register></Register>}></Route>
       </Routes>
     );
   }

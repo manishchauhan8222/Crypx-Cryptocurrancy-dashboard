@@ -7,6 +7,7 @@ export default class MainSingleCoinPage extends Component {
   constructor() {
     super();
     this.state = {
+      chartType: "area",
       Id: "bitcoin",
       Data: {},
     };
@@ -21,10 +22,13 @@ export default class MainSingleCoinPage extends Component {
 
   handleSubmit = async (event) => {
     console.log(event.target.value);
-    await this.setState({ Id: event.target.value, Data: this.state.Data });
+    this.setState({ Id: event.target.value, Data: this.state.Data });
     this.fetchData();
   };
-
+  handleChartTypeChange = (event) => {
+    this.setState({ chartType: event.target.value });
+    console.log(this.state.chartType);
+  };
   componentDidMount() {
     this.fetchData();
     this.interval = setInterval(() => this.fetchData(), 2000);
@@ -38,6 +42,7 @@ export default class MainSingleCoinPage extends Component {
       <div>
         <Header
           handle_Submit={this.handleSubmit}
+          handleChartTypeChange={this.handleChartTypeChange}
           coinName={this.state.Data.name}
           currentPrice={
             this.state.Data.market_data
@@ -107,6 +112,7 @@ export default class MainSingleCoinPage extends Component {
         />
         <ChartSection
           Id={this.state.Id}
+          chartType={this.state.chartType}
           priceChange24={
             this.state.Data.market_data
               ? this.state.Data.market_data.price_change_24h_in_currency.usd
