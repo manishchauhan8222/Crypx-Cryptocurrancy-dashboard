@@ -40,9 +40,7 @@ export default class HomePage extends Component {
     let selectedImage = null;
 
     // Check the classes of the clicked element
-    if (targetClass.contains("desktop")) {
-      selectedImage = desktopImage;
-    } else if (targetClass.contains("pro")) {
+    if (targetClass.contains("pro")) {
       selectedImage = proImage;
     } else {
       selectedImage = mobileImage;
@@ -50,18 +48,6 @@ export default class HomePage extends Component {
 
     // Update the selectedImage state
     this.setState({ selectedImage });
-  };
-  toggleOffCanvas = () => {
-    const offcanvas = document.getElementById("offcanvasRight");
-    const body = document.body;
-
-    if (offcanvas.classList.contains("show")) {
-      offcanvas.classList.remove("show");
-      body.classList.remove("offcanvas-open");
-    } else {
-      offcanvas.classList.add("show");
-      body.classList.add("offcanvas-open");
-    }
   };
 
   render() {
@@ -212,44 +198,16 @@ export default class HomePage extends Component {
           <div className="home-container-2">
             <div className=" home-container-2-left">
               <div className="home-container-2-left-image">
-                {(selectedImage === desktopImage && (
-                  <img
-                    src={selectedImage}
-                    alt="selected image"
-                    className={`selected-image ${
-                      selectedImage === desktopImage ? "" : "hide-on-small"
-                    }`}
-                    style={{
-                      width: selectedImage === desktopImage ? "100%" : "50%",
-                    }}
-                  />
-                )) || (
-                  <img
-                    src={selectedImage}
-                    alt="selected image"
-                    className="selected-image"
-                    style={{
-                      width: selectedImage === desktopImage ? "100%" : "50%",
-                    }}
-                  />
-                )}
+                <img
+                  src={selectedImage}
+                  alt="selected image"
+                  className="selected-image"
+                  style={{
+                    width: "50%",
+                  }}
+                />
               </div>
               <div className="imagetoggle">
-                <p
-                  className={`imagetoggle-text desktop ${
-                    selectedImage === desktopImage ? "" : "hide-on-small"
-                  }`}
-                  onClick={(e) => this.toggleimage(e)}
-                  style={{
-                    borderBottom:
-                      selectedImage === desktopImage
-                        ? "1px solid #fcd535"
-                        : "none",
-                    color: selectedImage === desktopImage ? "white" : "inherit",
-                  }}
-                >
-                  Desktop
-                </p>
                 <p
                   className="imagetoggle-text lite"
                   onClick={(e) => this.toggleimage(e)}

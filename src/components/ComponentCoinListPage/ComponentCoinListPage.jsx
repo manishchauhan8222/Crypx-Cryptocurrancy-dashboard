@@ -57,7 +57,7 @@ export default class ComponentCoinListPage extends Component {
       .slice(indexOfFirstCoin, indexOfLastCoin)
       .map((item, index) => (
         <li className="list-group-item coin-data-container" key={index}>
-          <Link to="/singleCoin">
+          <Link to={`/singleCoin/${item.id}`}>
             <div className="list-group-item-container data-container">
               <div className="symbol-name-marketValue">
                 <p className="coin-headings">

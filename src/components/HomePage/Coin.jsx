@@ -12,7 +12,11 @@ export default class Coin extends Component {
         <ul className="list-group list-group-flush">
           {this.props.coins.map((item, index) => (
             <li className="list-group-item" key={index}>
-              <Link to="/singleCoin" className="link-tag">
+              <Link
+                to={`/singleCoin/${item.id}`}
+                className="link-tag"
+                value={item.symbol.toLowerCase()}
+              >
                 <div className="list-group-item-coin">
                   <div className="list-group-item-coin-left">
                     <span className="list-group-item-coin-left-coinsymbol">

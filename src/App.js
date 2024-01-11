@@ -138,6 +138,31 @@ export default class App extends Component {
       console.error("Error fetching coin list:", error);
     }
   };
+  fetchDataForComponentAPI = async (symbol) => {
+    try {
+      let data = await fetch(
+        `https://api.coingecko.com/api/v3/coins/${symbol.toLowerCase()}`
+      );
+      let jsonData = await data.json();
+      const price = jsonData.market_data?.current_price?.usd || "API Loading..";
+      const marketVolume =
+        jsonData.market_data?.total_volume?.usd || "API Loading..";
+      const high =
+        jsonData.market_data?.price_change_percentage_24h || "API Loading..";
+      return {
+        price,
+        marketVolume,
+        high,
+      };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return {
+        price: "API Loading..",
+        marketVolume: "API Loading..",
+        high: "API Loading..",
+      };
+    }
+  };
 
   updateCoinPriceForComponentAPI = async () => {
     try {
@@ -145,7 +170,7 @@ export default class App extends Component {
         this.state.componentCoinList.map(async (coin) => {
           try {
             const { price, marketVolume, high } =
-              await this.fetchDataForComponent(coin.id);
+              await this.fetchDataForComponentAPI(coin.symbol);
             return {
               ...coin,
               price,
@@ -197,7 +222,7 @@ export default class App extends Component {
             />
           }
         />
-        <Route path="/singleCoin" element={<MainSingleCoinPage />} />
+        <Route path="/singleCoin/:id" element={<MainSingleCoinPage />} />
         <Route path="/register" element={<Register></Register>}></Route>
       </Routes>
     );

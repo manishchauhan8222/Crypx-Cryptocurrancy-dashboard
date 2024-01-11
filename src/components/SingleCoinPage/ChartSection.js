@@ -144,9 +144,10 @@ export class ChartSection extends Component {
   prevId = this.props.Id;
 
   fetchData = async () => {
+    const name = window.location.href.split("/")[4].toString();
+    const url = "https://api.coingecko.com/api/v3/coins/" + name.toLowerCase();
     let chartData = await fetch(
-      "https://api.coingecko.com/api/v3/coins/" +
-        this.props.Id +
+      url +
         "/market_chart?vs_currency=usd&days=" +
         this.state.Price.options.selection
     );

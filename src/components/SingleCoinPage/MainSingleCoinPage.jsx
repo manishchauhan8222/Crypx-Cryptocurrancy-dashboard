@@ -7,27 +7,30 @@ export default class MainSingleCoinPage extends Component {
   constructor() {
     super();
     this.state = {
-      chartType: "area",
-      Id: "bitcoin",
+      chartType: "bar",
+      Id: "",
       Data: {},
     };
   }
-  fetchData = async () => {
-    let data = await fetch(
-      "https://api.coingecko.com/api/v3/coins/" + this.state.Id
-    );
+  fetchData = async (name2) => {
+    let name = window.location.href.split("/")[4].toString();
+    if (name2) {
+      name = name2;
+    }
+    const url = "https://api.coingecko.com/api/v3/coins/" + name.toLowerCase();
+    console.log(url);
+    let data = await fetch(url);
     let JsonData = await data.json();
-    this.setState({ Id: this.state.Id, Data: JsonData });
+    this.setState({ Id: name, Data: JsonData });
   };
 
   handleSubmit = async (event) => {
-    console.log(event.target.value);
-    this.setState({ Id: event.target.value, Data: this.state.Data });
-    this.fetchData();
+    this.fetchData(event.target.value);
   };
+
   handleChartTypeChange = (event) => {
     this.setState({ chartType: event.target.value });
-    console.log(this.state.chartType);
+    console.log(event.target.value);
   };
   componentDidMount() {
     this.fetchData();
