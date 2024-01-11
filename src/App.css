@@ -1,5 +1,6 @@
 body {
   background: #151928 !important;
+  overflow: auto !important;
 }
 .link-tag {
   text-decoration: none;

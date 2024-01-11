@@ -5,7 +5,7 @@ import TetherImage from "../Images/tether.png";
 import DogeImage from "../Images/dogecoin.png";
 import SupportImage from "../Images/headset.png";
 
-const HomePageSideBarMenu = [
+const HomePageSideBarMenuUpper = [
   {
     src: CryptoImage,
     item: `Buy Crypto`,
@@ -16,20 +16,23 @@ const HomePageSideBarMenu = [
     item: `Trade`,
     path: "/CoinList",
   },
+];
+
+const HomePageSideBarMenu = [
   {
     src: BitcoinImage,
     item: `Buy Bitcoin`,
-    path: "/singleCoin",
+    id: "bitcoin",
   },
   {
     src: TetherImage,
     item: `Buy Tether`,
-    path: "/singleCoin",
+    id: "tether",
   },
   {
     src: DogeImage,
     item: `Buy Dogecoin`,
-    path: "/singleCoin",
+    id: "dogecoin",
   },
   {
     src: SupportImage,
@@ -37,4 +40,4 @@ const HomePageSideBarMenu = [
     path: "",
   },
 ];
-export default HomePageSideBarMenu;
+export { HomePageSideBarMenu, HomePageSideBarMenuUpper };

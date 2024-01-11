@@ -101,11 +101,29 @@ export default class HomePage extends Component {
                     <div className="offcanvas-buttons">
                       <div className="hiuser">Hi User</div>
                     </div>
+                    {this.props.HomePageSideBarMenuUpper.map((item, index) => (
+                      <div className="offcanvas-items">
+                        <div className="offcanvas-item">
+                          <Link
+                            to={item.path}
+                            className="link-tag sidebar-link"
+                          >
+                            <img src={item.src}></img>
+
+                            <p className="offcanvas-text">{item.item}</p>
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
                     {this.props.HomePageSideBarMenu.map((item, index) => (
                       <div className="offcanvas-items">
                         <div className="offcanvas-item">
-                          <img src={item.src}></img>
-                          <Link to={item.path} className="link-tag">
+                          <Link
+                            to={`/singleCoin/${item.id}`}
+                            className="link-tag sidebar-link"
+                          >
+                            <img src={item.src}></img>
+
                             <p className="offcanvas-text">{item.item}</p>
                           </Link>
                         </div>

@@ -68,6 +68,10 @@
   height: 100vh;
   background: #151928 !important;
 }
+.sidebar-link {
+  display: flex;
+  gap: 1rem;
+}
 
 .offcanvas-button {
   width: 37%;

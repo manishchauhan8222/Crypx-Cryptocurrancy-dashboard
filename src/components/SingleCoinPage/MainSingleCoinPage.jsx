@@ -34,10 +34,6 @@ export default class MainSingleCoinPage extends Component {
   };
   componentDidMount() {
     this.fetchData();
-    this.interval = setInterval(() => this.fetchData(), 2000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   render() {

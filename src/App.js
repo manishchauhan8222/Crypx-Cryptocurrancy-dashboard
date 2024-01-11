@@ -7,7 +7,10 @@ import "./App.css";
 // OBJECT DATA
 import HomePageCoinList from "./components/ObjectData/HomePageCoinList";
 import StaticComponentCoinList from "./components/ObjectData/StaticComponentCoinList";
-import HomePageSideBarMenu from "./components/ObjectData/HomePageSideBarMenu";
+import {
+  HomePageSideBarMenu,
+  HomePageSideBarMenuUpper,
+} from "./components/ObjectData/HomePageSideBarMenu";
 
 //PAGES
 import HomePage from "./components/HomePage/HomePage";
@@ -209,6 +212,7 @@ export default class App extends Component {
           element={
             <HomePage
               HomePageSideBarMenu={HomePageSideBarMenu}
+              HomePageSideBarMenuUpper={HomePageSideBarMenuUpper}
               coins={this.state.coins}
             />
           }
